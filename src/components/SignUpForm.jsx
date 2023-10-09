@@ -3,20 +3,21 @@ import React from "react";
 import { useState } from "react";
 
 export default function SignUpForm() {
+  const initialValues = {
+    name: "",
+    email: "",
+    password: "",
+  };
   const formik = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      password: "",
+    initialValues,
+    onSubmit: (values) => {
+      console.log(values);
     },
   });
-  console.log(formik.values);
-  const submitHandler = (e) => {
-    e.preventDefault();
-  };
+
   return (
     <div>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={formik.handleSubmit}>
         <div className="formControl">
           <label>Name</label>
           <input
