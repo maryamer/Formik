@@ -39,9 +39,10 @@ export default function SignUpForm() {
           <input
             type="text"
             name="name"
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            value={formik.values.name}
+            {...formik.getFieldProps("name")}
+            // onBlur={formik.handleBlur}
+            // onChange={formik.handleChange}
+            // value={formik.values.name}
           />
           {formik.errors.name && formik.touched.name && (
             <div className="validationError">{formik.errors.name}</div>
@@ -52,9 +53,11 @@ export default function SignUpForm() {
           <input
             type="text"
             name="email"
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            value={formik.values.email}
+            {...formik.getFieldProps("email")}
+
+            // onBlur={formik.handleBlur}
+            // onChange={formik.handleChange}
+            // value={formik.values.email}
           />
           {formik.errors.email && formik.touched.email && (
             <div className="validationError">{formik.errors.email}</div>
@@ -65,6 +68,7 @@ export default function SignUpForm() {
           <input
             type="text"
             name="password"
+            {...formik.getFieldProps("password")}
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.password}
