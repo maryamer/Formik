@@ -11,17 +11,18 @@ export default function SignUpForm() {
   const onSubmit = (values) => {
     // console.log(values);
   };
+  const validate = (values) => {
+    let errors = {};
+    if (!values.name) errors.name = "name is required";
+    if (!values.email) errors.email = "email is required";
+    if (!values.password) errors.password = "password is required";
+    console.log(formik.errors);
+    return errors;
+  };
   const formik = useFormik({
     initialValues,
     onSubmit,
-    validate: (values) => {
-      let errors = {};
-      if (!values.name) errors.name = "name is required";
-      if (!values.email) errors.email = "email is required";
-      if (!values.password) errors.password = "password is required";
-      console.log(formik.errors);
-      return errors;
-    },
+    validate,
   });
 
   return (
@@ -32,27 +33,39 @@ export default function SignUpForm() {
           <input
             type="text"
             name="name"
+            onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.name}
           />
+          {formik.errors.name && formik.touched.name && (
+            <div className="validationError">{formik.errors.name}</div>
+          )}
         </div>
         <div className="formControl">
           <label>Email</label>
           <input
             type="text"
             name="email"
+            onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.email}
           />
+          {formik.errors.email && formik.touched.email && (
+            <div className="validationError">{formik.errors.email}</div>
+          )}
         </div>
         <div className="formControl">
           <label>Password</label>
           <input
             type="text"
             name="password"
+            onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.password}
           />
+          {formik.errors.password && formik.touched.password && (
+            <div className="validationError">{formik.errors.password}</div>
+          )}
         </div>
         <button>Submit</button>
       </form>
