@@ -8,10 +8,19 @@ export default function SignUpForm() {
     email: "",
     password: "",
   };
+  const onSubmit = (values) => {
+    // console.log(values);
+  };
   const formik = useFormik({
     initialValues,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit,
+    validate: (values) => {
+      let errors = {};
+      if (!values.name) errors.name = "name is required";
+      if (!values.email) errors.email = "email is required";
+      if (!values.password) errors.password = "password is required";
+      console.log(formik.errors);
+      return errors;
     },
   });
 
