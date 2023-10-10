@@ -6,6 +6,8 @@ export default function SignUpForm() {
     name: "",
     email: "",
     password: "",
+    phone: "",
+    passwordConfirm: "",
   };
   const onSubmit = (values) => {
     // console.log(values);
@@ -19,11 +21,25 @@ export default function SignUpForm() {
   //     return errors;
   //   };
   const validationSchema = Yup.object({
-    name: Yup.string("name should be string ").required("name is required"),
+    name: Yup.string("name should be string ")
+      .required("name is required")
+      .min(6, "name at least 6 characters"),
     email: Yup.string()
       .required("email is required")
       .email("invalid email format"),
-    password: Yup.string().required("password is required"),
+    phone: Yup.string()
+      .required()
+      .matches(/^[0-9]{11}$/, "Invalid phone number")
+      .nullable(),
+    password: Yup.string()
+      .required("password is required")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+      ),
+    passwordConfirm: Yup.string()
+      .required()
+      .oneOf([Yup.ref("password"), null], "Passwords must match"),
   });
   const formik = useFormik({
     initialValues,
@@ -36,45 +52,51 @@ export default function SignUpForm() {
       <form onSubmit={formik.handleSubmit}>
         <div className="formControl">
           <label>Name</label>
-          <input
-            type="text"
-            name="name"
-            {...formik.getFieldProps("name")}
-            // onBlur={formik.handleBlur}
-            // onChange={formik.handleChange}
-            // value={formik.values.name}
-          />
+          <input type="text" name="name" {...formik.getFieldProps("name")} />
           {formik.errors.name && formik.touched.name && (
             <div className="validationError">{formik.errors.name}</div>
           )}
         </div>
         <div className="formControl">
           <label>Email</label>
-          <input
-            type="text"
-            name="email"
-            {...formik.getFieldProps("email")}
-
-            // onBlur={formik.handleBlur}
-            // onChange={formik.handleChange}
-            // value={formik.values.email}
-          />
+          <input type="text" name="email" {...formik.getFieldProps("email")} />
           {formik.errors.email && formik.touched.email && (
             <div className="validationError">{formik.errors.email}</div>
           )}
         </div>
         <div className="formControl">
+          <label>Phone :</label>
+          <input
+            type="number"
+            name="phone"
+            {...formik.getFieldProps("phone")}
+          />
+          {formik.errors.phone && formik.touched.phone && (
+            <div className="validationError">{formik.errors.phone}</div>
+          )}
+        </div>
+        <div className="formControl">
           <label>Password</label>
           <input
-            type="text"
+            type="password"
             name="password"
             {...formik.getFieldProps("password")}
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            value={formik.values.password}
           />
           {formik.errors.password && formik.touched.password && (
             <div className="validationError">{formik.errors.password}</div>
+          )}
+        </div>
+        <div className="formControl">
+          <label>Password Confirmation</label>
+          <input
+            type="password"
+            name="passwordConfirm"
+            {...formik.getFieldProps("passwordConfirm")}
+          />
+          {formik.errors.passwordConfirm && formik.touched.passwordConfirm && (
+            <div className="validationError">
+              {formik.errors.passwordConfirm}
+            </div>
           )}
         </div>
         <button>Submit</button>
