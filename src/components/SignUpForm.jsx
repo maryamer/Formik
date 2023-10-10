@@ -1,6 +1,8 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
+import Input from "./common/input";
+import RadioInput from "./common/RadioInput";
 
 const savedData = {
   name: "maryam eb",
@@ -19,6 +21,10 @@ const initialValues = {
   gender: "",
 };
 export default function SignUpForm() {
+  const radioOptions = [
+    { label: "male", value: "0" },
+    { label: "female", value: "1" },
+  ];
   const [formValues, setFormValues] = useState(null);
   const onSubmit = (values) => {
     // console.log("submit");
@@ -55,78 +61,23 @@ export default function SignUpForm() {
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
-        <div className="formControl">
-          <label>Name</label>
-          <input type="text" name="name" {...formik.getFieldProps("name")} />
-          {formik.errors.name && formik.touched.name && (
-            <div className="validationError">{formik.errors.name}</div>
-          )}
-        </div>
-        <div className="formControl">
-          <label>Email</label>
-          <input type="text" name="email" {...formik.getFieldProps("email")} />
-          {formik.errors.email && formik.touched.email && (
-            <div className="validationError">{formik.errors.email}</div>
-          )}
-        </div>
-        <div className="formControl">
-          <label>Phone :</label>
-          <input
-            type="number"
-            name="phone"
-            {...formik.getFieldProps("phone")}
-          />
-          {formik.errors.phone && formik.touched.phone && (
-            <div className="validationError">{formik.errors.phone}</div>
-          )}
-        </div>
-        <div className="formControl">
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            {...formik.getFieldProps("password")}
-          />
-          {formik.errors.password && formik.touched.password && (
-            <div className="validationError">{formik.errors.password}</div>
-          )}
-        </div>
-        <div className="formControl">
-          <label>Password Confirmation</label>
-          <input
-            type="password"
-            name="passwordConfirm"
-            {...formik.getFieldProps("passwordConfirm")}
-          />
-          {formik.errors.passwordConfirm && formik.touched.passwordConfirm && (
-            <div className="validationError">
-              {formik.errors.passwordConfirm}
-            </div>
-          )}
-        </div>
-        <div className="formControl">
-          <input
-            type="radio"
-            id="0"
-            name="gender"
-            value="0"
-            onChange={formik.handleChange}
-            checked={formik.values.gender === "0"}
-          />
-          <label htmlFor="0">male</label>
-          <input
-            type="radio"
-            id="1"
-            name="gender"
-            value="1"
-            onChange={formik.handleChange}
-            checked={formik.values.gender === "1"}
-          />
-          <label htmlFor="1">female</label>
-          {formik.errors.gender && formik.touched.gender && (
-            <div className="validationError">{formik.errors.gender}</div>
-          )}
-        </div>
+        <Input label="Name" name="name" formik={formik} />
+        <Input label="Email" name="email" formik={formik} type="email" />
+        <Input label="Phone" name="phone" formik={formik} type="number" />
+        <Input
+          label="Password"
+          name="password"
+          formik={formik}
+          type="password"
+        />
+        <Input
+          label="Password Confirmation"
+          name="passwordConfirm"
+          formik={formik}
+          type="passwordConfirm"
+        />
+
+        <RadioInput radioOptions={radioOptions} formik={formik} name="gender" />
         <button onClick={() => setFormValues(savedData)}>load data</button>
         <button type="submit " disabled={!formik.isValid}>
           Submit
