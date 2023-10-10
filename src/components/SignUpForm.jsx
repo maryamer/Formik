@@ -1,25 +1,28 @@
 import { useFormik } from "formik";
+import { useState } from "react";
 import * as Yup from "yup";
 
+const savedData = {
+  name: "maryam eb",
+  email: "maryamebrahimi@gmail.com",
+  phone: "09125558866",
+  password: "Maryam@2",
+  passwordConfirm: "Maryam@2",
+  gender: "1",
+};
+const initialValues = {
+  name: "",
+  email: "",
+  phone: "",
+  password: "",
+  passwordConfirm: "",
+  gender: "",
+};
 export default function SignUpForm() {
-  const initialValues = {
-    name: "",
-    email: "",
-    password: "",
-    phone: "",
-    passwordConfirm: "",
-  };
+  const [formValues, setFormValues] = useState(null);
   const onSubmit = (values) => {
-    console.log("submit");
+    // console.log("submit");
   };
-  //   const validate = (values) => {
-  //     let errors = {};
-  //     if (!values.name) errors.name = "name is required";
-  //     if (!values.email) errors.email = "email is required";
-  //     if (!values.password) errors.password = "password is required";
-  //     console.log(formik.errors);
-  //     return errors;
-  //   };
   const validationSchema = Yup.object({
     name: Yup.string("name should be string ")
       .required("name is required")
@@ -40,14 +43,15 @@ export default function SignUpForm() {
     passwordConfirm: Yup.string()
       .required()
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
+    gender: Yup.string().required("gender is required"),
   });
   const formik = useFormik({
-    initialValues,
+    initialValues: formValues || initialValues,
     onSubmit,
     validationSchema,
     validateOnMount: true,
+    enableReinitialize: true,
   });
-
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
@@ -100,6 +104,30 @@ export default function SignUpForm() {
             </div>
           )}
         </div>
+        <div className="formControl">
+          <input
+            type="radio"
+            id="0"
+            name="gender"
+            value="0"
+            onChange={formik.handleChange}
+            checked={formik.values.gender === "0"}
+          />
+          <label htmlFor="0">male</label>
+          <input
+            type="radio"
+            id="1"
+            name="gender"
+            value="1"
+            onChange={formik.handleChange}
+            checked={formik.values.gender === "1"}
+          />
+          <label htmlFor="1">female</label>
+          {formik.errors.gender && formik.touched.gender && (
+            <div className="validationError">{formik.errors.gender}</div>
+          )}
+        </div>
+        <button onClick={() => setFormValues(savedData)}>load data</button>
         <button type="submit " disabled={!formik.isValid}>
           Submit
         </button>

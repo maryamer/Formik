@@ -9,7 +9,7 @@ label {
   margin-bottom: 5px;
   font-weight: 800;
 }
-input {
+/* input {
   width: 400px;
   padding: 6px 12px;
   display: block;
@@ -17,7 +17,7 @@ input {
   color: #444;
   border: 1px solid #ccc;
   border-radius: 4px;
-}
+} */
 .formControl {
   margin-bottom: 20px;
 }
@@ -27,4 +27,24 @@ button {
 }
 .validationError {
   color: red;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"] {
+  width: 400px;
+  padding: 6px 12px;
+  display: block;
+  background-color: #fff;
+  color: #444;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input + label {
+  font-weight: bold;
+  display: inline-flex;
+  margin-right: 20px;
+  margin-left: 5px;
 }
