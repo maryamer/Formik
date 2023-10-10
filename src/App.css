@@ -23,7 +23,7 @@ input {
 }
 button {
   padding: 5px 15px;
-  color: #fff;
+  color: black;
 }
 .validationError {
   color: red;

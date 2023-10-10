@@ -10,7 +10,7 @@ export default function SignUpForm() {
     passwordConfirm: "",
   };
   const onSubmit = (values) => {
-    // console.log(values);
+    console.log("submit");
   };
   //   const validate = (values) => {
   //     let errors = {};
@@ -45,6 +45,7 @@ export default function SignUpForm() {
     initialValues,
     onSubmit,
     validationSchema,
+    validateOnMount: true,
   });
 
   return (
@@ -99,7 +100,9 @@ export default function SignUpForm() {
             </div>
           )}
         </div>
-        <button>Submit</button>
+        <button type="submit " disabled={!formik.isValid}>
+          Submit
+        </button>
       </form>
     </div>
   );
