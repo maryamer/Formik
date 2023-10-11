@@ -1,19 +1,21 @@
+import axios from "axios";
 import { useFormik } from "formik";
+import { useEffect } from "react";
 import { useState } from "react";
 import * as Yup from "yup";
 import Input from "./common/input";
 import RadioInput from "./common/RadioInput";
 import SelectComponent from "./common/SelectComponent";
 
-const savedData = {
-  name: "maryam eb",
-  email: "maryamebrahimi@gmail.com",
-  phone: "09125558866",
-  password: "Maryam@2",
-  passwordConfirm: "Maryam@2",
-  gender: "1",
-  nationality: "IR",
-};
+// const savedData = {
+//   name: "maryam eb",
+//   email: "maryamebrahimi@gmail.com",
+//   phone: "09125558866",
+//   password: "Maryam@2",
+//   passwordConfirm: "Maryam@2",
+//   gender: "1",
+//   nationality: "IR",
+// };
 const initialValues = {
   name: "",
   email: "",
@@ -69,6 +71,18 @@ export default function SignUpForm() {
     validateOnMount: true,
     enableReinitialize: true,
   });
+  //  http://localhost:5000/users
+  useEffect(() => {
+    async function getUserData() {
+      try {
+        const { data } = await axios.get("http://localhost:5000/users/1");
+        setFormValues(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getUserData();
+  }, []);
   console.log(formik.values);
   return (
     <div>
@@ -94,7 +108,7 @@ export default function SignUpForm() {
           formik={formik}
           name="nationality"
         />
-        <button onClick={() => setFormValues(savedData)}>load data</button>
+        {/* <button onClick={() => setFormValues(savedData)}>load data</button> */}
         <button type="submit " disabled={!formik.isValid}>
           Submit
         </button>
