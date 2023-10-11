@@ -3,19 +3,11 @@ import { useFormik } from "formik";
 import { useEffect } from "react";
 import { useState } from "react";
 import * as Yup from "yup";
+import CheckBoxInput from "./common/CheckBoxInput";
 import Input from "./common/input";
 import RadioInput from "./common/RadioInput";
 import SelectComponent from "./common/SelectComponent";
 
-// const savedData = {
-//   name: "maryam eb",
-//   email: "maryamebrahimi@gmail.com",
-//   phone: "09125558866",
-//   password: "Maryam@2",
-//   passwordConfirm: "Maryam@2",
-//   gender: "1",
-//   nationality: "IR",
-// };
 const initialValues = {
   name: "",
   email: "",
@@ -24,8 +16,14 @@ const initialValues = {
   passwordConfirm: "",
   gender: "",
   nationality: "",
+  interests: [], //["React.js","Vue.js"]
 };
+
 export default function SignUpForm() {
+  const checkBoxOptions = [
+    { label: "React.js", value: "React.js" },
+    { label: "Vue.js", value: "Vue.js" },
+  ];
   const radioOptions = [
     { label: "male", value: "0" },
     { label: "female", value: "1" },
@@ -38,9 +36,7 @@ export default function SignUpForm() {
     { label: "german", value: "GER" },
   ];
   const [formValues, setFormValues] = useState(null);
-  const onSubmit = (values) => {
-    // console.log("submit");
-  };
+  const onSubmit = (values) => {};
   const validationSchema = Yup.object({
     name: Yup.string("name should be string ")
       .required("name is required")
@@ -63,6 +59,7 @@ export default function SignUpForm() {
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
     gender: Yup.string().required("gender is required"),
     nationality: Yup.string().required("select nationality"),
+    interests: Yup.array().min(1, "at least select one experties").required(),
   });
   const formik = useFormik({
     initialValues: formValues || initialValues,
@@ -108,6 +105,12 @@ export default function SignUpForm() {
           formik={formik}
           name="nationality"
         />
+        <CheckBoxInput
+          checkBoxOptions={checkBoxOptions}
+          formik={formik}
+          name="interests"
+        />
+
         {/* <button onClick={() => setFormValues(savedData)}>load data</button> */}
         <button type="submit " disabled={!formik.isValid}>
           Submit

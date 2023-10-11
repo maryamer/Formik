@@ -7,7 +7,8 @@
   "password": "Maryam@2",
   "passwordConfirm": "Maryam@2",
   "gender": "1",
-  "nationality": "IR"
+  "nationality": "IR",
+  "interests":["React.js"]
 }]
 
 }
