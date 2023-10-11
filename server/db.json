@@ -1,5 +1,5 @@
 {
-    "users":[ {
+"users":[ {
   "id":"1",
   "name": "maryam eb",
   "email": "maryamebrahimi@gmail.com",
@@ -8,7 +8,8 @@
   "passwordConfirm": "Maryam@2",
   "gender": "1",
   "nationality": "IR",
-  "interests":["React.js"]
+  "interests":["React.js"],
+  "terms":false
 }]
 
 }

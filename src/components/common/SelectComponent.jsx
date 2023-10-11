@@ -1,7 +1,7 @@
 export default function SelectComponent({ selectOptions, formik, name }) {
   return (
     <div className="formControl">
-      <select name={name} {...formik.getFieldProps(name)}>
+      <select name={name} {...formik.getFieldProps({ name })}>
         {" "}
         {selectOptions.map((item) => (
           <option key={item.value} value={item.value}>

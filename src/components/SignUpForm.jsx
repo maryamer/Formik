@@ -17,6 +17,7 @@ const initialValues = {
   gender: "",
   nationality: "",
   interests: [], //["React.js","Vue.js"]
+  terms: false,
 };
 
 export default function SignUpForm() {
@@ -60,6 +61,7 @@ export default function SignUpForm() {
     gender: Yup.string().required("gender is required"),
     nationality: Yup.string().required("select nationality"),
     interests: Yup.array().min(1, "at least select one experties").required(),
+    terms: Yup.bool().oneOf([true], "You must accept the terms and conditions"),
   });
   const formik = useFormik({
     initialValues: formValues || initialValues,
@@ -80,6 +82,7 @@ export default function SignUpForm() {
     }
     getUserData();
   }, []);
+  console.log(formik.errors);
   console.log(formik.values);
   return (
     <div>
@@ -110,6 +113,24 @@ export default function SignUpForm() {
           formik={formik}
           name="interests"
         />
+
+        <div className="formControl">
+          {" "}
+          <input
+            type="checkbox"
+            id="terms"
+            name="terms"
+            value={true}
+            // {...formik.getFieldProps({ name })}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            checked={formik.values.terms}
+          />
+          <label htmlFor="terms">Terms and Conditions</label>
+          {formik.errors.terms && formik.touched.terms && (
+            <div className="validationError">{formik.errors.terms}</div>
+          )}
+        </div>
 
         {/* <button onClick={() => setFormValues(savedData)}>load data</button> */}
         <button type="submit " disabled={!formik.isValid}>

@@ -11,6 +11,8 @@ export default function CheckBoxInput({ checkBoxOptions, formik, name }) {
             id={item.value}
             name={name}
             value={item.value}
+            // {...formik.getFieldProps({ name })}
+            onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             checked={formik.values[name].includes(item.value)}
           />
