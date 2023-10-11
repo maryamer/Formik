@@ -39,7 +39,7 @@ export default function SignUpForm() {
   const [formValues, setFormValues] = useState(null);
   const onSubmit = async (values) => {
     try {
-      axios.patch("http://localhost:5000/users/1", {
+      axios.post("http://localhost:5000/users", {
         ...values,
         birthDate: "1 september 2003",
       });

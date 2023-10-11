@@ -1,20 +1,19 @@
 {
   "users": [
     {
-      "id": "1",
       "name": "maryam eb",
-      "email": "maryamebrahimi@gmail.com",
-      "phone": "09125558866",
+      "email": "eve.holt@reqres.in",
+      "phone": 99377056704,
       "password": "Maryam@2",
       "passwordConfirm": "Maryam@2",
       "gender": "1",
-      "nationality": "IR",
+      "nationality": "TR",
       "interests": [
-        "React.js",
-        "Vue.js"
+        "React.js"
       ],
       "terms": true,
-      "birthDate": "1 september 2003"
+      "birthDate": "1 september 2003",
+      "id": 1
     }
   ]
 }
