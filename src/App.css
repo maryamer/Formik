@@ -32,7 +32,8 @@ button {
 input[type="text"],
 input[type="number"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+select {
   width: 400px;
   padding: 6px 12px;
   display: block;

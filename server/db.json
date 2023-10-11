@@ -1,0 +1,12 @@
+{
+    "users":[ {
+  "name": "maryam eb",
+  "email": "maryamebrahimi@gmail.com",
+  "phone": "09125558866",
+  "password": "Maryam@2",
+  "passwordConfirm": "Maryam@2",
+  "gender": "1",
+  "nationality": "IR"
+}]
+
+}
