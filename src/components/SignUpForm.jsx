@@ -37,7 +37,14 @@ export default function SignUpForm() {
     { label: "german", value: "GER" },
   ];
   const [formValues, setFormValues] = useState(null);
-  const onSubmit = (values) => {};
+  const onSubmit = async (values) => {
+    try {
+      axios.patch("http://localhost:5000/users/1", {
+        ...values,
+        birthDate: "1 september 2003",
+      });
+    } catch (error) {}
+  };
   const validationSchema = Yup.object({
     name: Yup.string("name should be string ")
       .required("name is required")
@@ -81,9 +88,9 @@ export default function SignUpForm() {
       }
     }
     getUserData();
+    console.log(formik.values);
   }, []);
-  console.log(formik.errors);
-  console.log(formik.values);
+  // console.log(formik.errors);
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>

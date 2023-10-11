@@ -1,15 +1,20 @@
 {
-"users":[ {
-  "id":"1",
-  "name": "maryam eb",
-  "email": "maryamebrahimi@gmail.com",
-  "phone": "09125558866",
-  "password": "Maryam@2",
-  "passwordConfirm": "Maryam@2",
-  "gender": "1",
-  "nationality": "IR",
-  "interests":["React.js"],
-  "terms":false
-}]
-
+  "users": [
+    {
+      "id": "1",
+      "name": "maryam eb",
+      "email": "maryamebrahimi@gmail.com",
+      "phone": "09125558866",
+      "password": "Maryam@2",
+      "passwordConfirm": "Maryam@2",
+      "gender": "1",
+      "nationality": "IR",
+      "interests": [
+        "React.js",
+        "Vue.js"
+      ],
+      "terms": true,
+      "birthDate": "1 september 2003"
+    }
+  ]
 }
